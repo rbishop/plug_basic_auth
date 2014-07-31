@@ -1,0 +1,4 @@
+PlugBasicAuth
+=============
+
+** TODO: Add description **
