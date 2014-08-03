@@ -8,7 +8,7 @@ defmodule Secret do
 
   get "/" do
     conn
-    |> put_resp_content_type("text/html")
+    |> put_resp_content_type("text/plain")
     |> send_resp(200, "Hello, Newman.")
   end
 end
