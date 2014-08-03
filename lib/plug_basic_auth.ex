@@ -11,15 +11,13 @@ defmodule Plug.BasicAuth do
     username <> ":" <> password
   end
 
-  def wrap(conn, server_credentials, plug_stack) do
-    authorization = get_req_header(conn, "authorization")
-    case authorization do
+  def wrap(conn, server_creds, plug_stack) do
+    case get_req_header(conn, "authorization") do
       [] ->
         respond_with_login(conn)
-      [auth | _] ->
-        ["Basic", encoded_credentials] = String.split(auth, " ")
-        {:ok, decoded_credentials}     = Base.decode64(encoded_credentials)
-        if decoded_credentials == server_credentials do
+      ["Basic " <> encoded_creds | _] ->
+        {:ok, decoded_creds} = Base.decode64(encoded_creds)
+        if decoded_creds == server_creds do
           plug_stack.(conn)
         else
           respond_with_login(conn)
@@ -29,7 +27,7 @@ defmodule Plug.BasicAuth do
 
   defp respond_with_login(conn) do
     conn
-    |> put_resp_header("www-authenticate", "Basic realm =\"Private Area\"")
+    |> put_resp_header("Www-Authenticate", "Basic realm =\"Private Area\"")
     |> send_resp(401, "")
   end
 end
