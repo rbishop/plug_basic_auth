@@ -50,4 +50,4 @@ end
 
 ## License
 
-Plug.BasicAuth uses the same license as Plug and the Elixir programming language. See the [license file](https://raw.githubusercontent.com/rbishop/plug-basic_auth/master/LICENSE) for more information.
+Plug.BasicAuth uses the same license as Plug and the Elixir programming language. See the [license file](https://raw.githubusercontent.com/rbishop/plug_basic_auth/master/LICENSE) for more information.
