@@ -1,9 +1,41 @@
 defmodule Plug.BasicAuth do
+  @moduledoc """
+  A plug for protecting routers with HTTP Basic Auth.
+
+  It expects a `:username` and `:password` to be passed as
+  binaries at initialization.
+
+  The user will be prompted for a username and password upon
+  accessing any of the routes using this plug. 
+
+  If the username and password are correct, the user will be 
+  able to access the page.
+
+  If the username and password are incorrect, the user will be 
+  prompted to enter them again.
+
+  ## Example
+
+      defmodule TopSecret do
+        import Plug.Conn
+        use Plug.Router
+
+        plug Plug.BasicAuth, username: "Snorky", password: "Capone"
+        plug :match
+        plug :dispatch
+
+        get '/speakeasy' do
+          conn
+          |> put_resp_content_type("text/plain")
+          |> send_resp(200, "Welcome to the party.")
+        end
+      end
+  """
+  @behaviour Plug.Wrapper
+
   import Plug.Conn, only: [get_req_header:  2,
                            put_resp_header: 3,
                            send_resp:       3]
-
-  @behaviour Plug.Wrapper
 
   def init(opts) do
     username = Keyword.fetch!(opts, :username)
