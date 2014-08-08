@@ -3,7 +3,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   def project do
     [app: :plug_basic_auth,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 0.15.0",
      deps: deps,
      package: package,
@@ -26,6 +26,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   defp package do
     %{licenses: ["Apache 2"],
+      contributors: ["Richard Bishop"],
       links: %{"Github" => "https://github.com/rbishop/plug_basic_auth"}}
   end
 end

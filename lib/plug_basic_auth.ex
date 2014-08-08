@@ -1,4 +1,4 @@
-defmodule Plug.BasicAuth do
+defmodule PlugBasicAuth do
   @moduledoc """
   A plug for protecting routers with HTTP Basic Auth.
 
@@ -20,7 +20,7 @@ defmodule Plug.BasicAuth do
         import Plug.Conn
         use Plug.Router
 
-        plug Plug.BasicAuth, username: "Snorky", password: "Capone"
+        plug PlugBasicAuth, username: "Snorky", password: "Capone"
         plug :match
         plug :dispatch
 

@@ -1,4 +1,4 @@
-# Plug.BasicAuth
+# PlugBasicAuth
 
 This is a Plug module for adding [HTTP Basic Authentication](http://tools.ietf.org/html/rfc2617) to a set of routes. Only basic authentication is currently supported.
 
@@ -16,14 +16,14 @@ Then run `mix do deps.get, deps.compile` inside your project's directory.
 
 ## Usage
 
-Plug.BasicAuth can be used just as any other Plug. Add Plug.BasicAuth before all of the other plugs you want to happen after successful authentication using the `plug` function.
+PlugBasicAuth can be used just as any other Plug. Add PlugBasicAuth before all of the other plugs you want to happen after successful authentication using the `plug` function.
 
 ```elixir
 defmodule TopSecret do
   import Plug.Conn
   use Plug.Router
   
-  plug Plug.BasicAuth, username: "Wayne", password: "Knight"
+  plug PlugBasicAuth, username: "Wayne", password: "Knight"
   plug :match
   plug :dispatch
   
@@ -50,4 +50,4 @@ end
 
 ## License
 
-Plug.BasicAuth uses the same license as Plug and the Elixir programming language. See the [license file](https://raw.githubusercontent.com/rbishop/plug_basic_auth/master/LICENSE) for more information.
+PlugBasicAuth uses the same license as Plug and the Elixir programming language. See the [license file](https://raw.githubusercontent.com/rbishop/plug_basic_auth/master/LICENSE) for more information.

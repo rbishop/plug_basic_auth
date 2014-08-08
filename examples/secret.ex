@@ -2,7 +2,7 @@ defmodule Secret do
   import Plug.Conn
   use Plug.Router
 
-  plug Plug.BasicAuth, username: "Wayne", password: "Knight"
+  plug PlugBasicAuth, username: "Wayne", password: "Knight"
   plug :match
   plug :dispatch
 

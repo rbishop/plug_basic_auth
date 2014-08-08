@@ -6,7 +6,7 @@ defmodule PlugBasicAuthTest do
     import Plug.Conn
     use Plug.Router
 
-    plug Plug.BasicAuth, username: "Tester", password: "McTester"
+    plug PlugBasicAuth, username: "Tester", password: "McTester"
     plug :match
     plug :dispatch
 
