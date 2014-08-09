@@ -6,12 +6,12 @@ defmodule PlugBasicAuth do
   binaries at initialization.
 
   The user will be prompted for a username and password upon
-  accessing any of the routes using this plug. 
+  accessing any of the routes using this plug.
 
-  If the username and password are correct, the user will be 
+  If the username and password are correct, the user will be
   able to access the page.
 
-  If the username and password are incorrect, the user will be 
+  If the username and password are incorrect, the user will be
   prompted to enter them again.
 
   ## Example
@@ -44,18 +44,27 @@ defmodule PlugBasicAuth do
   end
 
   def wrap(conn, server_creds, plug_stack) do
-    case get_req_header(conn, "authorization") do
-      [] ->
-        respond_with_login(conn)
-      ["Basic " <> encoded_creds | _] ->
-        {:ok, decoded_creds} = Base.decode64(encoded_creds)
-        if decoded_creds == server_creds do
-          plug_stack.(conn)
-        else
-          respond_with_login(conn)
-        end
-    end
+    conn
+    |> get_auth_header
+    |> parse_auth
+    |> check_creds(server_creds, plug_stack)
   end
+
+  defp get_auth_header(conn) do
+    auth = get_req_header(conn, "authorization")
+    {conn, auth}
+  end
+
+  defp parse_auth({conn, ["Basic " <> encoded_creds | _]}) do
+    {:ok, decoded_creds} = Base.decode64(encoded_creds)
+    {conn, decoded_creds}
+  end
+  defp parse_auth({conn, _}), do: {conn, nil}
+
+  defp check_creds({conn, decoded_creds}, server_creds, plug_stack) when decoded_creds == server_creds do
+    plug_stack.(conn)
+  end
+  defp check_creds({conn, _}, _, _), do: respond_with_login(conn)
 
   defp respond_with_login(conn) do
     conn

@@ -21,7 +21,7 @@ defmodule PlugBasicAuthTest do
     PrivatePlug.call(conn, [])
   end
 
-  test "prompts for username on password" do
+  test "prompts for username and password" do
     conn = conn(:get, "/") |> call
     assert conn.status == 401
     assert get_resp_header(conn, "Www-Authenticate") == ["Basic realm=\"Private Area\""]
