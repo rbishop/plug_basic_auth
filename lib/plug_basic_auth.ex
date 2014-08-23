@@ -31,11 +31,11 @@ defmodule PlugBasicAuth do
         end
       end
   """
-  @behaviour Plug.Wrapper
 
   import Plug.Conn, only: [get_req_header:  2,
                            put_resp_header: 3,
-                           send_resp:       3]
+                           send_resp:       3,
+                           halt:            1]
 
   def init(opts) do
     username = Keyword.fetch!(opts, :username)
@@ -43,11 +43,11 @@ defmodule PlugBasicAuth do
     username <> ":" <> password
   end
 
-  def wrap(conn, server_creds, plug_stack) do
+  def call(conn, server_creds) do
     conn
     |> get_auth_header
     |> parse_auth
-    |> check_creds(server_creds, plug_stack)
+    |> check_creds(server_creds)
   end
 
   defp get_auth_header(conn) do
@@ -61,14 +61,15 @@ defmodule PlugBasicAuth do
   end
   defp parse_auth({conn, _}), do: {conn, nil}
 
-  defp check_creds({conn, decoded_creds}, server_creds, plug_stack) when decoded_creds == server_creds do
-    plug_stack.(conn)
+  defp check_creds({conn, decoded_creds}, server_creds) when decoded_creds == server_creds do
+    conn
   end
-  defp check_creds({conn, _}, _, _), do: respond_with_login(conn)
+  defp check_creds({conn, _}, _), do: respond_with_login(conn)
 
   defp respond_with_login(conn) do
     conn
     |> put_resp_header("Www-Authenticate", "Basic realm=\"Private Area\"")
     |> send_resp(401, "")
+    |> halt
   end
 end
