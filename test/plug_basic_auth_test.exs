@@ -12,6 +12,7 @@ defmodule PlugBasicAuthTest do
 
     get "/" do
       conn
+      |> assign(:called, true)
       |> put_resp_content_type("text/plain")
       |> send_resp(200, "Hello Tester")
     end
@@ -25,6 +26,7 @@ defmodule PlugBasicAuthTest do
     conn = conn(:get, "/") |> call
     assert conn.status == 401
     assert get_resp_header(conn, "Www-Authenticate") == ["Basic realm=\"Private Area\""]
+    refute conn.assigns[:called]
   end
 
   test "passes connection through on successful login" do
@@ -33,6 +35,7 @@ defmodule PlugBasicAuthTest do
 
     assert conn.status == 200
     assert conn.resp_body == "Hello Tester"
+    assert conn.assigns[:called]
   end
 
   test "prompts for username and password again if they are incorrect" do
@@ -41,5 +44,6 @@ defmodule PlugBasicAuthTest do
 
     assert conn.status == 401
     assert get_resp_header(conn, "Www-Authenticate") == ["Basic realm=\"Private Area\""]
+    refute conn.assigns[:called]
   end
 end
