@@ -1,5 +1,5 @@
 %{"cowboy": {:package, "1.0.0"},
   "cowlib": {:package, "1.0.0"},
-  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "98567bc87369d710d31d46bfa9ce0d3bf18cb0d4", []},
-  "plug": {:package, "0.7.0"},
+  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "ce0fa1202f93642fdf84531257194eb73538d188", []},
+  "plug": {:package, "0.8.0"},
   "ranch": {:package, "1.0.0"}}
