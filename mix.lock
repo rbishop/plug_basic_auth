@@ -1,5 +1,5 @@
 %{"cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "ce0fa1202f93642fdf84531257194eb73538d188", []},
-  "plug": {:hex, :plug, "0.9.0"},
+  "plug": {:hex, :plug, "0.10.0"},
   "ranch": {:hex, :ranch, "1.0.0"}}
