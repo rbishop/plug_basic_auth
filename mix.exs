@@ -20,7 +20,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 0.10.0"},
+     {:plug, "~> 0.12.2"},
      {:ex_doc, github: "elixir-lang/ex_doc", only: [:docs]}]
   end
 
