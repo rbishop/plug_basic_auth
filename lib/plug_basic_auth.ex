@@ -68,7 +68,7 @@ defmodule PlugBasicAuth do
 
   defp respond_with_login(conn) do
     conn
-    |> put_resp_header("Www-Authenticate", "Basic realm=\"Private Area\"")
+    |> put_resp_header("www-authenticate", "Basic realm=\"Private Area\"")
     |> send_resp(401, "")
     |> halt
   end
