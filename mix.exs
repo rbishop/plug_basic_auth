@@ -3,7 +3,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   def project do
     [app: :plug_basic_auth,
-     version: "0.3.1",
+     version: "0.3.2",
      elixir: "~> 1.0.0",
      deps: deps,
      package: package,
@@ -20,7 +20,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 0.12.2"},
+     {:plug, "~> 0.13.0"},
      {:ex_doc, github: "elixir-lang/ex_doc", only: [:docs]}]
   end
 
