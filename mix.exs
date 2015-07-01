@@ -11,7 +11,7 @@ defmodule PlugBasicAuth.Mixfile do
      source_url: "https://github.com/rbishop/plug_basic_auth",
      homepage_url: "https://github.com/rbishop/plug_basic_auth",
      description: "A Plug for using HTTP Basic Authentication in Plug applications",
-     docs: [readme: true, main: "README"]]
+     docs: [readme: "README.md", main: "README"]]
   end
 
   def application do
@@ -20,8 +20,8 @@ defmodule PlugBasicAuth.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 0.13.0"},
-     {:ex_doc, github: "elixir-lang/ex_doc", only: [:docs]}]
+     {:plug, "~> 0.13"},
+     {:ex_doc, "~> 0.7", only: :dev}]
   end
 
   defp package do
