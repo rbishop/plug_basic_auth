@@ -35,19 +35,6 @@ defmodule TopSecret do
 end
 ```
 
-## Todo
-
-* Enable adding authentication on a per route basis, instead of per router
-* Add support for Digest Authentication
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
 ## License
 
 PlugBasicAuth uses the same license as Plug and the Elixir programming language. See the [license file](https://raw.githubusercontent.com/rbishop/plug_basic_auth/master/LICENSE) for more information.
