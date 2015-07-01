@@ -25,13 +25,15 @@ defmodule PlugBasicAuthTest do
   test "prompts for username and password" do
     conn = conn(:get, "/") |> call
     assert conn.status == 401
-    assert get_resp_header(conn, "Www-Authenticate") == ["Basic realm=\"Private Area\""]
+    assert get_resp_header(conn, "www-authenticate") == ["Basic realm=\"Private Area\""]
     refute conn.assigns[:called]
   end
 
   test "passes connection through on successful login" do
     auth_header = "Basic " <> Base.encode64("Tester:McTester")
-    conn = conn(:get, "/", [], headers: [{"authorization", auth_header}]) |> call
+    conn = conn(:get, "/")
+    |> put_req_header("authorization", auth_header) 
+    |> call
 
     assert conn.status == 200
     assert conn.resp_body == "Hello Tester"
@@ -40,10 +42,12 @@ defmodule PlugBasicAuthTest do
 
   test "prompts for username and password again if they are incorrect" do
     incorrect_credentials = "Basic " <> Base.encode64("Not:Valid")
-    conn = conn(:get, "/", [], headers: [{"authorization", incorrect_credentials}]) |> call
+    conn = conn(:get, "/")
+    |> put_req_header("authorization", incorrect_credentials) 
+    |> call
 
     assert conn.status == 401
-    assert get_resp_header(conn, "Www-Authenticate") == ["Basic realm=\"Private Area\""]
+    assert get_resp_header(conn, "www-authenticate") == ["Basic realm=\"Private Area\""]
     refute conn.assigns[:called]
   end
 end
