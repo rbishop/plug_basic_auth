@@ -4,7 +4,7 @@ defmodule PlugBasicAuth.Mixfile do
   def project do
     [app: :plug_basic_auth,
      version: "0.3.3",
-     elixir: "~> 1.0.0",
+     elixir: "~> 1.0",
      deps: deps,
      package: package,
      name: "Plug Basic Auth",
