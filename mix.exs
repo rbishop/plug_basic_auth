@@ -1,5 +1,5 @@
 defmodule PlugBasicAuth.Mixfile do
- Mix.Project
+  use Mix.Project
 
   def project do
     [app: :plug_basic_auth,
