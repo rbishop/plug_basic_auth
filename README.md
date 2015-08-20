@@ -8,7 +8,7 @@ Add `plug_basic_auth` to the `deps` function in your project's `mix.exs` file:
 
 ```elixir
 defp deps do
-  [{:plug_basic_auth, "~> 0.4"}]
+  [{:plug_basic_auth, "~> 1.0"}]
 end
 ```
 	
