@@ -6,7 +6,7 @@ defmodule PlugBasicAuthTest do
     import Plug.Conn
     use Plug.Router
 
-    plug PlugBasicAuth, username: "Tester", password: "McTester"
+    plug PlugBasicAuth, validation: &PrivatePlug.is_authorized/2
     plug :match
     plug :dispatch
 
@@ -16,6 +16,9 @@ defmodule PlugBasicAuthTest do
       |> put_resp_content_type("text/plain")
       |> send_resp(200, "Hello Tester")
     end
+
+    def is_authorized("Tester", "McTester"), do: :authorized
+    def is_authorized(_user, _pwd), do: :unauthorized
   end
 
   defp call(conn) do

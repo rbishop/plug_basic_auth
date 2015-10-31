@@ -22,18 +22,28 @@ PlugBasicAuth can be used just as any other Plug. Add PlugBasicAuth before all o
 defmodule TopSecret do
   import Plug.Conn
   use Plug.Router
-  
-  plug PlugBasicAuth, username: "Wayne", password: "Knight"
+
+  plug PlugBasicAuth, validation: &TopSecret.is_authorized/2
   plug :match
   plug :dispatch
-  
+
   get "/top_secret" do
     conn
     |> put_resp_content_type("text/plain")
     |> send_resp(200, "Hello, Newman.")
   end
+
+  def is_authorized("Wayne", "Knight"), do: :authorized
+  def is_authorized(_user, _password), do: :unauthorized
 end
 ```
+
+#### The validation callback
+The validation callback will be called to decide if the user is authorized or not.
+
+* It has to be defined in the format `&Mod.fun/2`.
+
+* It receives `username, password` and must return `:authorized` or `:unauthorized`
 
 ## License
 
