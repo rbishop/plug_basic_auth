@@ -26,7 +26,7 @@ defmodule PlugBasicAuth.Mixfile do
 
   defp package do
     %{licenses: ["Apache 2"],
-      contributors: ["Richard Bishop"],
+      maintainers: ["Richard Bishop"],
       links: %{"Github" => "https://github.com/rbishop/plug_basic_auth"}}
   end
 end
